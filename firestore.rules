@@ -1,0 +1,145 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+	match /{datosUsuarios}/{document=**}{
+		allow read:if true;
+		allow create: if request.resource.data.idemp is string &&
+						 request.resource.data.usuario is string &&
+						 request.resource.data.email is string;
+		allow update: if true;
+		allow delete: if false;
+		allow write: if true;
+	}
+  }
+
+
+   // Customers table
+    match /Customers/{document=**} {
+        allow read: if true;
+        allow write: if request.resource.data.Address is string &&
+                          request.resource.data.City is string &&
+                          request.resource.data.CompanyName is string &&
+                          request.resource.data.ContactName is string &&
+                          request.resource.data.ContactTitle is string &&
+                          request.resource.data.Country is string &&
+                          request.resource.data.CustomerID is int &&
+                          request.resource.data.Fax is string &&
+                          request.resource.data.Phone is int &&
+                          request.resource.data.PostalCode is int &&
+                          request.resource.data.Region is string;
+        allow update: if true;
+        allow delete: if false;
+        allow create: if true;
+    }
+
+    // Orders table
+    match /Orders/{document=**} {
+        allow read: if true;
+        allow write: if request.resource.data.OrderID is int &&
+                          request.resource.data.CustomerID is int &&
+                          request.resource.data.EmployeeID is int &&
+                          request.resource.data.OrderDate is timestamp &&
+                          request.resource.data.RequiredDate is timestamp &&
+                          request.resource.data.ShippedDate is timestamp &&
+                          request.resource.data.ShipVia is int &&
+                          request.resource.data.Freight is float &&
+                          request.resource.data.ShipName is string &&
+                          request.resource.data.ShipAddress is string &&
+                          request.resource.data.ShipCity is string &&
+                          request.resource.data.ShipRegion is string &&
+                          request.resource.data.ShipPostalCode is int &&
+                          request.resource.data.ShipCountry is string;
+        allow update: if true;
+        allow delete: if false;
+        allow create: if true;
+    }
+
+    // OrderDetails table
+    match /OrderDetails/{document=**} {
+        allow read: if true;
+        allow write: if request.resource.data.OrderID is int &&
+                          request.resource.data.ProductID is int &&
+                          request.resource.data.UnitPrice is float &&
+                          request.resource.data.Quantity is int &&
+                          request.resource.data.Discount is float;
+        allow update: if true;
+        allow delete: if false;
+        allow create: if true;
+    }
+
+    // Products table
+    match /Products/{document=**} {
+        allow read: if true;
+        allow write: if request.resource.data.ProductID is int &&
+                          request.resource.data.ProductName is string &&
+                          request.resource.data.SupplierID is int &&
+                          request.resource.data.CategoryID is int &&
+                          request.resource.data.QuantityPerUnit is string &&
+                          request.resource.data.UnitPrice is float &&
+                          request.resource.data.UnitsInStock is int &&
+                          request.resource.data.UnitsOnOrder is int &&
+                          request.resource.data.ReorderLevel is int &&
+                          request.resource.data.Discontinued is bool;
+        allow update: if true;
+        allow delete: if false;
+        allow create: if true;
+    }
+
+    // Employees table
+    match /Employees/{document=**} {
+        allow read: if true;
+        allow write: if request.resource.data.EmployeeID is int &&
+                          request.resource.data.LastName is string &&
+                          request.resource.data.FirstName is string &&
+                          request.resource.data.Title is string &&
+                          request.resource.data.TitleOfCourtesy is string &&
+                          request.resource.data.BirthDate is timestamp &&
+                          request.resource.data.HireDate is timestamp &&
+                          request.resource.data.Address is string &&
+                          request.resource.data.City is string &&
+                          request.resource.data.Region is string &&
+                          request.resource.data.PostalCode is int &&
+                          request.resource.data.Country is string &&
+                          request.resource.data.HomePhone is int &&
+                          request.resource.data.Extension is string &&
+                          request.resource.data.Notes is string &&
+                          request.resource.data.ReportsTo is int;
+        allow update: if true;
+        allow delete: if false;
+        allow create: if true;
+    }
+
+    // Shippers table
+    match /Shippers/{document=**} {
+        allow read: if true;
+        allow write: if request.resource.data.ShipperID is int &&
+                          request.resource.data.CompanyName is string &&
+                          request.resource.data.Phone is int;
+        allow update: if true;
+        allow delete: if false;
+        allow create: if true;
+    }
+
+    // Suppliers table
+    match /Suppliers/{document=**} {
+        allow read: if true;
+        allow write: if request.resource.data.SupplierID is int &&
+                          request.resource.data.CompanyName is string &&
+                          request.resource.data.ContactName is string &&
+                          request.resource.data.ContactTitle is string &&
+                          request.resource.data.Address is string &&
+                          request.resource.data.City is string &&
+                          request.resource.data.Region is string &&
+                          request.resource.data.PostalCode is int &&
+                          request.resource.data.Country is string &&
+                          request.resource.data.Phone is int &&
+                          request.resource.data.Fax is string &&
+                          request.resource.data.HomePage is string;
+        allow update: if true;
+        allow delete: if false;
+        allow create: if true;
+    }
+
+
+}
+
